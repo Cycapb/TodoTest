@@ -51,6 +51,8 @@
   <ItemGroup>
     <Compile Include="Abstract\IRepository.cs" />
     <Compile Include="Concrete\EntityRepository.cs" />
+    <Compile Include="Models\Status.cs" />
+    <Compile Include="Models\Todo.cs" />
     <Compile Include="Models\TodoContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
