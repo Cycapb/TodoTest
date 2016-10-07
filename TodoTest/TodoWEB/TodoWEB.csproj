@@ -153,6 +153,7 @@
     <Compile Include="Infrastructure\FakeUserModelBinder.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Infrastructure\UserModelBinder.cs" />
+    <Compile Include="Models\AddViewModel.cs" />
     <Compile Include="Models\WebUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

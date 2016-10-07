@@ -21,5 +21,11 @@ namespace TodoWEB.Controllers
             var items = (await _todoManager.GetListAsync(user.UserId)).ToList();
             return View(items);
         }
+
+        public ActionResult Add()
+        {
+            var model = new AddViewModel();
+            return PartialView(model);
+        }
     }
 }
