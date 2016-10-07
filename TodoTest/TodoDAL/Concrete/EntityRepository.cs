@@ -21,7 +21,7 @@ namespace TodoDAL.Concrete
         public async Task CreateAsync(T item)
         {
             _dbSet.Add(item);
-            await _context.SaveChangesAsync();
+            await Task.Run(() => _context.SaveChanges());
         }
 
         public async Task DeleteAsync(int id)

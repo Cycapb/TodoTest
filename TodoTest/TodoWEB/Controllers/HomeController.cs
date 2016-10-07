@@ -23,6 +23,12 @@ namespace TodoWEB.Controllers
             return View(items);
         }
 
+        public async Task<ActionResult> List(WebUser user)
+        {
+            var items = (await _todoManager.GetListAsync(user.UserId)).ToList();
+            return PartialView("_TodoList", items);
+        }
+
         public ActionResult Add()
         {
             var model = new AddViewModel();
@@ -39,11 +45,20 @@ namespace TodoWEB.Controllers
                 {
                     Description = model.Description,
                     CompletionDate = model.DtEnd,
-                    UserId = model.UserId
+                    UserId = model.UserId,
+                    StatusId = model.StatusId
                 };
                 await _todoManager.CreateAsync(todo);
+                return RedirectToAction("List");
             }
             return PartialView(model);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Delete(int id)
+        {
+            await _todoManager.DeleteAsync(id);
+            return RedirectToAction("List");
         }
     }
 }
