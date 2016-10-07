@@ -36,5 +36,10 @@ namespace TodoWEB.Concrete
         {
             await _todoRepository.DeleteAsync(id);
         }
+
+        public async Task CreateAsync(Todo item)
+        {
+            await _todoRepository.CreateAsync(item);
+        }
     }
 }

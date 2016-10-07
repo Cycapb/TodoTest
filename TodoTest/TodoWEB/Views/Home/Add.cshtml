@@ -6,6 +6,7 @@
     },new {@class="form-inline"}))
     {
         @Html.ValidationSummary(true)
+        @Html.HiddenFor(x => x.StatusId, new {Value = 1})
         <div class="form-group">
             @Html.LabelFor(x => x.Description)
             @Html.TextBoxFor(x => x.Description, new {@class = "form-control"})
