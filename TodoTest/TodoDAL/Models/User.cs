@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace TodoDAL.Models
 {
@@ -7,8 +8,10 @@ namespace TodoDAL.Models
     {
         public User() { }
 
-        public Guid UserId { get; set; }
+        public int UserId { get; set; }
+        [Required]
         public string Login { get; set; }
+        [Required]
         public string Password { get; set; }
         public string UserName { get; set; }
         public ICollection<Todo> Todos { get; set; }

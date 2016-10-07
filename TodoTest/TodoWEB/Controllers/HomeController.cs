@@ -10,9 +10,10 @@ using TodoWEB.Infrastructure;
 
 namespace TodoWEB.Controllers
 {
+    [BasicAuthentication]
     public class HomeController : Controller
     {
-        [BasicAuthentication]
+
         public ActionResult Index()
         {
             return View();
