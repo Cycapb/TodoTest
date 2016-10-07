@@ -13,7 +13,7 @@ namespace TodoWEB.Infrastructure
     public class NinjectDependencyResolver:IDependencyResolver
     {
         private readonly IKernel _kernel;
-
+        public IKernel Kernel { get { return _kernel; } }
         public NinjectDependencyResolver(IKernel kernel)
         {
             _kernel = kernel;
@@ -23,7 +23,9 @@ namespace TodoWEB.Infrastructure
         private void AddBindings()
         {
             _kernel.Bind<IUserChecker>().To<UserChecker>();
+            _kernel.Bind<ITodoManager>().To<TodoManager>();
             _kernel.Bind<IRepository<User>>().To<EntityRepository<User>>();
+            _kernel.Bind<IRepository<Todo>>().To<EntityRepository<Todo>>();
         }
 
         public object GetService(Type serviceType)

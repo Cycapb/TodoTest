@@ -6,6 +6,7 @@ using TodoDAL.Concrete;
 using TodoDAL.Models;
 using TodoWEB.Abstract;
 using TodoWEB.Concrete;
+using TodoWEB.Models;
 
 namespace TodoWEB.Infrastructure
 {
@@ -13,11 +14,10 @@ namespace TodoWEB.Infrastructure
     {
         private readonly IUserChecker _userChecker;
 
-        public string BasicRealm { get; set; }
-
         public BasicAuthenticationAttribute()
         {
-            _userChecker = CreateNinjectKernel().Get<IUserChecker>();
+            var k = System.Web.Mvc.DependencyResolver.Current.GetService(typeof(Infrastructure.NinjectDependencyResolver));
+            _userChecker = ((Infrastructure.NinjectDependencyResolver)k).Kernel.TryGet<IUserChecker>();
         }
 
         public override void OnActionExecuting(ActionExecutingContext filterContext)
@@ -30,10 +30,18 @@ namespace TodoWEB.Infrastructure
                 var user = new { Name = cred[0], Pass = cred[1] };
                 if (_userChecker.IsValid(user.Name, user.Pass))
                 {
+                    if (filterContext.HttpContext.Session != null)
+                    {
+                        filterContext.HttpContext.Session["WebUser"] = new WebUser()
+                        {
+                            Login = user.Name,
+                            Password = user.Pass
+                        };
+                    }
                     return;
                 }
             }
-            filterContext.HttpContext.Response.AddHeader("WWW-Authenticate", $"Basic realm=\"{BasicRealm ?? "Test"}\"");
+            filterContext.HttpContext.Response.AddHeader("WWW-Authenticate", "Basic realm=\"Test\"");
             filterContext.Result = new HttpUnauthorizedResult();
         }
 

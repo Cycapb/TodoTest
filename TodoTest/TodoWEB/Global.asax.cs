@@ -1,5 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
+using TodoWEB.Infrastructure;
+using TodoWEB.Models;
 
 namespace TodoWEB
 {
@@ -9,6 +11,7 @@ namespace TodoWEB
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            ModelBinders.Binders.Add(typeof(WebUser),new FakeUserModelBinder());
         }
     }
 }

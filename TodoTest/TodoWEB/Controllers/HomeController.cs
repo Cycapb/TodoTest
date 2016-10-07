@@ -1,20 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Ninject;
+﻿using System.Web.Mvc;
 using TodoWEB.Abstract;
-using TodoWEB.Concrete;
-using TodoWEB.Infrastructure;
+using TodoWEB.Models;
 
 namespace TodoWEB.Controllers
 {
-    [BasicAuthentication]
+    
     public class HomeController : Controller
     {
+        private readonly ITodoManager _todoManager;
 
-        public ActionResult Index()
+        public HomeController(ITodoManager todoManager)
+        {
+            _todoManager = todoManager;
+        }
+
+        public ActionResult Index(WebUser user)
         {
             return View();
         }
