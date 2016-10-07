@@ -5,7 +5,11 @@
 <div class="panel panel-primary">
     <div class="panel-heading">
         <input type="text"/>
-        <button class="btn btn-default btn-sm pull-right">Добавить</button>
+        @Ajax.ActionLink("Добавить", "Add", null, new AjaxOptions()
+        {
+            Url = Url.Action("Add"),
+            UpdateTargetId = "todoPanel"
+        }, new {@class = "btn btn-success btn-sm pull-right"})
     </div>
     <div class="panel-body" id="todoPanel">
         <table class="table table-hover" id="todoTable">
