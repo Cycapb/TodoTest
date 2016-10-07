@@ -1,4 +1,6 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Threading.Tasks;
+using System.Web.Mvc;
 using TodoWEB.Abstract;
 using TodoWEB.Models;
 
@@ -14,9 +16,10 @@ namespace TodoWEB.Controllers
             _todoManager = todoManager;
         }
 
-        public ActionResult Index(WebUser user)
+        public async Task<ActionResult> Index(WebUser user)
         {
-            return View();
+            var items = (await _todoManager.GetListAsync(user.UserId)).ToList();
+            return View(items);
         }
     }
 }

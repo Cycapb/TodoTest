@@ -1,7 +1,30 @@
-﻿
+﻿@model IEnumerable<TodoDAL.Models.Todo>
 @{
     ViewBag.Title = "Список задач";
 }
-
-<h2>Index</h2>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <input type="text"/>
+        <button class="btn btn-default btn-sm pull-right">Добавить</button>
+    </div>
+    <div class="panel-body" id="todoPanel">
+        <table class="table table-hover" id="todoTable">
+            <tr>
+                <th></th>
+                <th>Описание</th>
+                <th>Дата выполнения</th>
+                <th>Действие</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td></td>
+                    <td>@item.Description</td>
+                    <td>@item.CompletionDate.ToShortDateString()</td>
+                    <td><button class="btn btn-danger btn-xs"></button></td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
 

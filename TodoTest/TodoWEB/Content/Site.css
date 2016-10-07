@@ -1,0 +1,15 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+.homeContainer {
+    width: 800px;
+    padding-top: 20px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.container {
+    width: 800px;
+    padding-top: 30px;
+    position: relative;
+}
