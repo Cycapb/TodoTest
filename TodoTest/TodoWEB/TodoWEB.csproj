@@ -121,6 +121,7 @@
     <Compile Include="Abstract\IUserChecker.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Concrete\TodoManager.cs" />
     <Compile Include="Concrete\UserChecker.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
