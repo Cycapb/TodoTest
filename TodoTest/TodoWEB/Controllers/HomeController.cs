@@ -39,14 +39,14 @@ namespace TodoWEB.Controllers
         public async Task<ActionResult> Add(WebUser user, AddViewModel model)
         {
             model.UserId = user.UserId;
+            model.Complete = false;
             if (ModelState.IsValid)
             {
                 var todo = new Todo()
                 {
                     Description = model.Description,
                     CompletionDate = model.DtEnd,
-                    UserId = model.UserId,
-                    StatusId = model.StatusId
+                    UserId = model.UserId
                 };
                 await _todoManager.CreateAsync(todo);
                 return RedirectToAction("List");
@@ -58,6 +58,12 @@ namespace TodoWEB.Controllers
         public async Task<ActionResult> Delete(int id)
         {
             await _todoManager.DeleteAsync(id);
+            return RedirectToAction("List");
+        }
+
+        public async Task<ActionResult> Complete(int id)
+        {
+            await _todoManager.CompleteAsync(id);
             return RedirectToAction("List");
         }
     }

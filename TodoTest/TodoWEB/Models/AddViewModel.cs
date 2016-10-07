@@ -11,7 +11,7 @@ namespace TodoWEB.Models
         public string Description { get; set; }
         [Display(Name = "Дата выполнения")]
         public DateTime DtEnd { get; set; }
-        public int StatusId { get; set; }
+        public bool Complete { get; set; }
         [HiddenInput(DisplayValue = false)]
         public int UserId { get; set; }
     }

@@ -11,5 +11,6 @@ namespace TodoWEB.Abstract
         Task UpdateAsync(Todo item);
         Task DeleteAsync(int id);
         Task CreateAsync(Todo item);
+        Task CompleteAsync(int id);
     }
 }

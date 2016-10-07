@@ -42,5 +42,13 @@ namespace TodoWEB.Concrete
         {
             await _todoRepository.CreateAsync(item);
         }
+
+        public async Task CompleteAsync(int id)
+        {
+            var todo = await _todoRepository.GetItemAsync(id);
+            todo.Complete = true;
+            await _todoRepository.UpdateAsync(todo);
+            await _todoRepository.SaveAsync();
+        }
     }
 }
