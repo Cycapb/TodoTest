@@ -7,7 +7,6 @@ namespace TodoDAL.Models
         public TodoContext()  : base("name=todoConnection") {}
 
         public DbSet<Todo> Todos { get; set; }
-        public DbSet<Status> Statuses { get; set; }
         public DbSet<User> Users { get; set; }
     }
 }

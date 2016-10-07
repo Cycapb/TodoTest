@@ -9,10 +9,9 @@ namespace TodoDAL.Models
         public int TodoId { get; set; }
         public string Description { get; set; }
         public DateTime CompletionDate { get; set; }
-        public int StatusId { get; set; }
+        public bool Complete { get; set; }
         public int UserId { get; set; }
 
-        public Status Status { get; set; }
         public User User { get; set; }
     }
 }
