@@ -38,6 +38,11 @@ namespace TodoDAL.Concrete
             return await _dbSet.FindAsync(id);
         }
 
+        public IEnumerable<T> GetList()
+        {
+            return _dbSet.AsEnumerable();
+        }
+
         public async Task<IEnumerable<T>> GetListAsync()
         {
             return await Task.Run(() =>_dbSet.AsEnumerable());

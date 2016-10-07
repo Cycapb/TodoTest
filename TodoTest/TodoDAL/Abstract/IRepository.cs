@@ -3,8 +3,9 @@ using System.Threading.Tasks;
 
 namespace TodoDAL.Abstract
 {
-    public interface IRepository<T> where T:class 
+    public interface IRepository<T> where T:class
     {
+        IEnumerable<T> GetList();
         Task<IEnumerable<T>> GetListAsync();
         Task<T> GetItemAsync(int id);
         Task CreateAsync(T item);

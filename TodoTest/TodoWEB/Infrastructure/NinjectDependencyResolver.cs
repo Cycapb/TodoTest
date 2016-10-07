@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using System.Web.Mvc;
 using Ninject;
+using TodoDAL.Abstract;
+using TodoDAL.Concrete;
+using TodoDAL.Models;
+using TodoWEB.Abstract;
+using TodoWEB.Concrete;
 
 namespace TodoWEB.Infrastructure
 {
@@ -17,7 +22,8 @@ namespace TodoWEB.Infrastructure
 
         private void AddBindings()
         {
-            
+            _kernel.Bind<IUserChecker>().To<UserChecker>();
+            _kernel.Bind<IRepository<User>>().To<EntityRepository<User>>();
         }
 
         public object GetService(Type serviceType)
