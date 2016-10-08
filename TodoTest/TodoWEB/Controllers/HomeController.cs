@@ -67,5 +67,32 @@ namespace TodoWEB.Controllers
             await _todoManager.CompleteAsync(id);
             return RedirectToAction("List");
         }
+
+        public async Task<ActionResult> Edit(int id)
+        {
+            var item = await _todoManager.GetItemAsync(id);
+            if (item == null){ return RedirectToAction("List"); }
+            var model = new EditViewModel()
+            {
+                Description = item.Description,
+                DtEnd = item.CompletionDate,
+                Id = item.TodoId
+            };
+            return PartialView(model);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Edit(EditViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var todo = await _todoManager.GetItemAsync(model.Id);
+                todo.CompletionDate = model.DtEnd;
+                todo.Description = model.Description;
+                await _todoManager.UpdateAsync(todo);
+                return RedirectToAction("List");
+            }
+            return PartialView(model);
+        }
     }
 }
