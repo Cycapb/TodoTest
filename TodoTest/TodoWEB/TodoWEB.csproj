@@ -257,6 +257,7 @@
     <Content Include="Scripts\jquery-3.1.1.min.map" />
     <Content Include="Views\Home\Add.cshtml" />
     <Content Include="Views\Home\_TodoList.cshtml" />
+    <Content Include="Views\Home\_TodoItem.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

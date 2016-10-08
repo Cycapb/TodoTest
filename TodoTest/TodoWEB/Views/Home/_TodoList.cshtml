@@ -5,30 +5,51 @@
         <th>Статус</th>
         <th>Описание</th>
         <th>Дата выполнения</th>
-        <th>Действие</th>
+        <th colspan="2" class="text-center">Действие</th>
     </tr>
     @foreach (var item in Model)
+    {
+            if (item.Complete && item.CompletionDate > DateTime.Today.Date)
             {
-        <tr>
-            <td>@Html.CheckBox("Complete",item.Complete)</td>
-            <td>@item.Description</td>
-            <td>@item.CompletionDate.ToShortDateString()</td>
-            <td>
-                @using (Ajax.BeginForm("Delete", new { id = item.TodoId }, new AjaxOptions()
+                <tr class="warning">
+                    @Html.Partial("_TodoItem", item)
+                </tr>
+            }
+            else
+            {
+                if (item.Complete)
                 {
-                    Url = Url.Action("Delete", new { id = item.TodoId }),
-                    UpdateTargetId = "todoPanel"
-                }))
-                {
-                    @Ajax.ActionLink("Завершить","Complete",new {id = item.TodoId},new AjaxOptions()
-                    {
-                        Url = Url.Action("Complete",new {id = item.TodoId}),
-                        UpdateTargetId = "todoPanel"
-                    },new {@class="btn btn-success btn-xs"})
-                    <input type="submit" value="Delete" class="btn btn-danger btn-xs" />
+                    <tr class="success">
+                        @Html.Partial("_TodoItem", item)
+                    </tr>
                 }
-            </td>
-        </tr>
+            }
+
+
+        if (!item.Complete && item.CompletionDate == DateTime.Today.Date)
+        {
+            <tr class="info">
+                @Html.Partial("_TodoItem", item)
+            </tr>
+        }
+        else
+        {
+            if (!item.Complete && item.CompletionDate.Date < DateTime.Today.Date)
+            {
+                <tr class="danger">
+                    @Html.Partial("_TodoItem", item)
+                </tr>
+            }
+            else
+            {
+                if (!item.Complete)
+                {
+                    <tr>
+                        @Html.Partial("_TodoItem", item)
+                    </tr>
+                }
+            }
+        }
     }
 </table>
 

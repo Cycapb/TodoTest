@@ -1,0 +1,27 @@
+﻿@model TodoDAL.Models.Todo
+<td>@Html.CheckBox("Complete", Model.Complete)</td>
+<td>@Model.Description</td>
+<td>@Model.CompletionDate.ToShortDateString()</td>
+<td>
+    @using (Ajax.BeginForm("Delete", new {id = Model.TodoId}, new AjaxOptions()
+    {
+        Url = Url.Action("Delete", new {id = Model.TodoId}),
+        UpdateTargetId = "todoPanel"
+    }))
+    {
+        <input type="submit" value="Удалить" class="btn btn-danger btn-xs"/>
+    }
+</td>
+<td>
+    @if (!Model.Complete)
+    {
+        using (Ajax.BeginForm("Complete", new {id = Model.TodoId}, new AjaxOptions()
+        {
+            Url = Url.Action("Complete", new {id = Model.TodoId}),
+            UpdateTargetId = "todoPanel"
+        }))
+        {
+            <input type="submit" value="Завершить" class="btn btn-success btn-xs"/>
+        }
+    }
+</td>

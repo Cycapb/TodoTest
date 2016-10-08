@@ -61,6 +61,7 @@ namespace TodoWEB.Controllers
             return RedirectToAction("List");
         }
 
+        [HttpPost]
         public async Task<ActionResult> Complete(int id)
         {
             await _todoManager.CompleteAsync(id);
