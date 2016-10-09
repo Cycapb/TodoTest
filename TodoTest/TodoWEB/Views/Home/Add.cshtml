@@ -14,13 +14,18 @@
         <div class="form-group">
             @Html.LabelFor(x => x.DtEnd)
             @Html.TextBoxFor(x => x.DtEnd, new
-       {
-           @class = "datepicker form-control",
-           id= "todo_DtEnd",
-           onclick = "clickDate()",
-           Value = DateTime.Today.ToShortDateString()
-       })
+            {
+                @class = "datepicker form-control",
+                id = "todo_DtEnd",
+                onclick = "clickDate()",
+                Value = DateTime.Today.ToShortDateString()
+            })
         </div>
-        <input type="submit" class="btn btn-success btn-sm pull-right" value="Сохранить"/>
+        @Ajax.ActionLink("На главную", "List", null, new AjaxOptions()
+       {
+           Url = Url.Action("List"),
+           UpdateTargetId = "todoPanel"
+       }, new { @class = "btn btn-default btn-sm pull-right" })
+        <input type="submit" class="btn btn-success btn-sm pull-right" value="Сохранить" />
     }
 

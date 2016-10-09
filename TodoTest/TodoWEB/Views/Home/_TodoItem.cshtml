@@ -3,17 +3,20 @@
 <td>@Model.Description</td>
 <td>@Model.CompletionDate.ToShortDateString()</td>
 <td>
-    @using (Ajax.BeginForm("Delete", new {id = Model.TodoId}, new AjaxOptions()
+    @using (Ajax.BeginForm("Delete", new { id = Model.TodoId }, new AjaxOptions()
     {
-        Url = Url.Action("Delete", new {id = Model.TodoId}),
+        Url = Url.Action("Delete", new { id = Model.TodoId }),
         UpdateTargetId = "todoPanel"
     }))
     {
-        @Ajax.ActionLink("Редактировать","Edit",new {id = Model.TodoId}, new AjaxOptions()
+        if (!Model.Complete)
         {
-            Url = Url.Action("Edit", new {id = Model.TodoId}),
-            UpdateTargetId = "todoPanel"
-        }, new {@class="btn btn-warning btn-xs"})
+            @Ajax.ActionLink("Редактировать", "Edit", new { id = Model.TodoId }, new AjaxOptions()
+            {
+                Url = Url.Action("Edit", new { id = Model.TodoId }),
+                UpdateTargetId = "todoPanel"
+            }, new { @class = "btn btn-warning btn-xs" })
+        }
         <input type="submit" value="Удалить" class="btn btn-danger btn-xs"/>
     }
 </td>
