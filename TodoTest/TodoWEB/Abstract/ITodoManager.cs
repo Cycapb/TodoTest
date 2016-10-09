@@ -6,6 +6,7 @@ namespace TodoWEB.Abstract
 {
     public interface ITodoManager
     {
+        IEnumerable<Todo> GetList(int userId);
         Task<IEnumerable<Todo>> GetListAsync(int userId);
         Task<Todo> GetItemAsync(int id);
         Task UpdateAsync(Todo item);

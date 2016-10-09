@@ -11,6 +11,7 @@ namespace TodoWEB.Controllers
     public class HomeController : Controller
     {
         private readonly ITodoManager _todoManager;
+        private readonly int _itemsPerPage = 7;
 
         public HomeController(ITodoManager todoManager)
         {
@@ -23,12 +24,22 @@ namespace TodoWEB.Controllers
             return View(items);
         }
 
-        public async Task<ActionResult> List(WebUser user)
+        public ActionResult List(WebUser user, int page = 1)
         {
-            var items = (await _todoManager.GetListAsync(user.UserId)).ToList();
+            var items =  _todoManager.GetList(user.UserId)
+                .Where(x => x.UserId == user.UserId)
+                .Skip((page - 1)*_itemsPerPage)
+                .Take(_itemsPerPage)
+                .ToList();
+            ViewBag.PagingInfo = new PagingInfo()
+            {
+                CurrentPage = page,
+                TotalItems = _todoManager.GetList(user.UserId).ToList().Count,
+                ItemsPerPage = _itemsPerPage
+            };
             return PartialView("_TodoList", items);
         }
-
+        
         public ActionResult Add()
         {
             var model = new AddViewModel();
@@ -49,7 +60,7 @@ namespace TodoWEB.Controllers
                     UserId = model.UserId
                 };
                 await _todoManager.CreateAsync(todo);
-                return RedirectToAction("List");
+                return RedirectToAction("ListItems");
             }
             return PartialView(model);
         }
@@ -62,10 +73,10 @@ namespace TodoWEB.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Complete(int id)
+        public async Task<ActionResult> Complete(int id, int currentPage)
         {
             await _todoManager.CompleteAsync(id);
-            return RedirectToAction("List");
+            return RedirectToAction("List",new {page = currentPage});
         }
 
         public async Task<ActionResult> Edit(int id)
@@ -90,7 +101,7 @@ namespace TodoWEB.Controllers
                 todo.CompletionDate = model.DtEnd;
                 todo.Description = model.Description;
                 await _todoManager.UpdateAsync(todo);
-                return RedirectToAction("List");
+                return RedirectToAction("ListItems");
             }
             return PartialView(model);
         }

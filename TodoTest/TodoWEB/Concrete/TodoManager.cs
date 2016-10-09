@@ -16,6 +16,11 @@ namespace TodoWEB.Concrete
             _todoRepository = todoRepository;
         }
 
+        public IEnumerable<Todo> GetList(int userId)
+        {
+            return _todoRepository.GetList().Where(x => x.UserId == userId);
+        }
+
         public async Task<IEnumerable<Todo>> GetListAsync(int userId)
         {
             return (await _todoRepository.GetListAsync()).Where(x => x.UserId == userId);

@@ -1,4 +1,6 @@
-﻿@model IEnumerable<TodoDAL.Models.Todo>
+﻿@using TodoWEB.Helpers
+@using TodoWEB.Models
+@model IEnumerable<TodoDAL.Models.Todo>
 @{
     ViewBag.Title = "Список задач";
 }
@@ -12,7 +14,6 @@
         }, new {@class = "btn btn-success btn-sm pull-right"})
     </div>
     <div class="panel-body" id="todoPanel">
-        @Html.Partial("_TodoList",Model)
+        @Html.Action("List")
     </div>
 </div>
-

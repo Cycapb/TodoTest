@@ -239,12 +239,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\PagingHelper.cs" />
     <Compile Include="Infrastructure\BasicAuthenticationAttribute.cs" />
     <Compile Include="Infrastructure\FakeUserModelBinder.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Infrastructure\UserModelBinder.cs" />
     <Compile Include="Models\AddViewModel.cs" />
     <Compile Include="Models\EditViewModel.cs" />
+    <Compile Include="Models\PagingInfo.cs" />
     <Compile Include="Models\WebUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -260,6 +262,7 @@
     <Content Include="Views\Home\_TodoList.cshtml" />
     <Content Include="Views\Home\_TodoItem.cshtml" />
     <Content Include="Views\Home\Edit.cshtml" />
+    <Content Include="Views\Home\_ListItems.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
