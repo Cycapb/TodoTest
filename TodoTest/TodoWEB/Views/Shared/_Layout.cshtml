@@ -4,17 +4,8 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-    <link href="~/Content/bootstrap.css" rel="stylesheet"/>
-    <link href="~/Content/bootstrap-theme.css" rel="stylesheet"/>
-    <link href="~/Content/bootstrap-datepicker.css" rel="stylesheet" />
-    <link href="~/Content/Site.css" rel="stylesheet"/>
-    <link href="~/Content/ErrorStyles.css" rel="stylesheet" />
-    <script src="~/Scripts/jquery-3.1.1.js"></script>
-    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
-    <script src="~/Scripts/bootstrap-datepicker.js"></script>
-    <script src="~/Scripts/locales/bootstrap-datepicker.ru.min.js"></script>
-    <script src="~/Scripts/CalendarScripts.js"></script>
-    <script src="~/Scripts/Scripts.js"></script>
+    @Styles.Render("~/bundles/bootstrap-datepicker/css")
+    @Scripts.Render("~/bundles/jquery-ajax")
 </head>
 <body>
     <div class="homeContainer">

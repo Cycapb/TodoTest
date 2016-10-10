@@ -252,6 +252,7 @@
   <ItemGroup>
     <Compile Include="Abstract\ITodoManager.cs" />
     <Compile Include="Abstract\IUserChecker.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Concrete\TodoManager.cs" />
