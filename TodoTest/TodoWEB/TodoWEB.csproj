@@ -226,6 +226,7 @@
     <Content Include="Scripts\locales\bootstrap-datepicker.zh-CN.min.js" />
     <Content Include="Scripts\locales\bootstrap-datepicker.zh-TW.min.js" />
     <Content Include="Scripts\CalendarScripts.js" />
+    <Content Include="Scripts\Scripts.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

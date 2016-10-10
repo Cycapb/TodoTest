@@ -1,0 +1,3 @@
+﻿function clearTextbox() {
+    $("#query").val("");
+}

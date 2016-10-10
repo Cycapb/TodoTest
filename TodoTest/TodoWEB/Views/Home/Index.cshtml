@@ -7,10 +7,11 @@
         @using (Ajax.BeginForm("Search",null,new AjaxOptions()
         {
             Url   = Url.Action("Search"),
-            UpdateTargetId = "todoPanel"
+            UpdateTargetId = "todoPanel",
+            OnSuccess = "clearTextbox"
         },new {@class="form-inline"}))
         {
-            @Html.TextBox("query", null, new {@class="form-control"})
+            @Html.TextBox("query", null, new {@class="form-control" })
             <input type="submit" value="Поиск" class="btn btn-default btn-xs"/>
             @Ajax.ActionLink("Добавить", "Add", null, new AjaxOptions()
                {
