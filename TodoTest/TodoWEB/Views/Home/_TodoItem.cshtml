@@ -14,7 +14,8 @@
             @Ajax.ActionLink("Редактировать", "Edit", new { id = Model.TodoId }, new AjaxOptions()
             {
                 Url = Url.Action("Edit", new { id = Model.TodoId }),
-                UpdateTargetId = "todoPanel"
+                UpdateTargetId = "todoPanel",
+                OnSuccess = "disableAdd"
             }, new { @class = "btn btn-warning btn-xs" })
         }
         <input type="submit" value="Удалить" class="btn btn-danger btn-xs"/>

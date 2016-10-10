@@ -17,7 +17,7 @@
             {
                 Url = Url.Action("Add"),
                 UpdateTargetId = "todoPanel"
-            }, new {@class = "btn btn-success btn-sm pull-right"})
+            }, new {@class = "btn btn-success btn-sm pull-right", id = "btnAdd"})
         }
     </div>
     <div class="panel-body" id="todoPanel">
@@ -27,5 +27,6 @@
 @Ajax.ActionLink("На главную", "List", null, new AjaxOptions()
 {
     Url = Url.Action("List"),
-    UpdateTargetId = "todoPanel"
+    UpdateTargetId = "todoPanel",
+    OnSuccess = "enableAdd"
 }, new { @class = "btn btn-default btn-xs pull-right" })

@@ -5,7 +5,8 @@
 @using (Ajax.BeginForm("Edit", new {id = Model.Id}, new AjaxOptions()
 {
     Url = Url.Action("Edit", new {id = Model.Id}),
-    UpdateTargetId = "todoPanel"
+    UpdateTargetId = "todoPanel",
+    OnSuccess = "enableAdd"
 }, new {@class = "form-inline"}))
 {
     @Html.ValidationSummary(true)
