@@ -1,8 +1,8 @@
 ﻿@model TodoDAL.Models.Todo
-<td>@Html.CheckBox("Complete", Model.Complete)</td>
+<td>@Html.CheckBox("Complete", Model.Complete, new {disabled="disabled"})</td>
 <td>@Model.Description</td>
 <td>@Model.CompletionDate.ToShortDateString()</td>
-<td>
+<td >
     @using (Ajax.BeginForm("Delete", new { id = Model.TodoId }, new AjaxOptions()
     {
         Url = Url.Action("Delete", new { id = Model.TodoId }),

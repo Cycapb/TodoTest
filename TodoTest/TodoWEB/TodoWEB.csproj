@@ -262,7 +262,6 @@
     <Content Include="Views\Home\_TodoList.cshtml" />
     <Content Include="Views\Home\_TodoItem.cshtml" />
     <Content Include="Views\Home\Edit.cshtml" />
-    <Content Include="Views\Home\_ListItems.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

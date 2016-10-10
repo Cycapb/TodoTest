@@ -60,7 +60,7 @@ namespace TodoWEB.Controllers
                     UserId = model.UserId
                 };
                 await _todoManager.CreateAsync(todo);
-                return RedirectToAction("ListItems");
+                return RedirectToAction("List");
             }
             return PartialView(model);
         }
@@ -73,10 +73,10 @@ namespace TodoWEB.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Complete(int id, int currentPage)
+        public async Task<ActionResult> Complete(int id)
         {
             await _todoManager.CompleteAsync(id);
-            return RedirectToAction("List",new {page = currentPage});
+            return RedirectToAction("List");
         }
 
         public async Task<ActionResult> Edit(int id)
@@ -101,7 +101,7 @@ namespace TodoWEB.Controllers
                 todo.CompletionDate = model.DtEnd;
                 todo.Description = model.Description;
                 await _todoManager.UpdateAsync(todo);
-                return RedirectToAction("ListItems");
+                return RedirectToAction("List");
             }
             return PartialView(model);
         }
