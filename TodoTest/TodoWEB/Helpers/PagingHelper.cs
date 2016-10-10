@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Text;
 using System.Web.Mvc;
 using TodoWEB.Models;
@@ -7,6 +8,7 @@ namespace TodoWEB.Helpers
 {
     public static class PagingHelper
     {
+
         public static MvcHtmlString CreatePages(this AjaxHelper htmlHelper, PagingInfo pagingInfo, Func<int, string> pageUrl)
         {
             StringBuilder result = new StringBuilder();
@@ -14,23 +16,38 @@ namespace TodoWEB.Helpers
             {
                 result.Append(CreateArrow(false, pagingInfo.CurrentPage, pageUrl));
             }
-            for (int i = 1; i <= pagingInfo.TotalPages; i++)
+
+            var pageItems = Pagination(pagingInfo.CurrentPage, pagingInfo.TotalPages);
+
+            for (int i = 1; i <= pageItems.Count; i++)
             {
-                TagBuilder tag = new TagBuilder("a");
-                tag.MergeAttribute("href", pageUrl(i));
-                tag.InnerHtml = i.ToString();
-                if (i == pagingInfo.CurrentPage)
+                var item = pageItems[i - 1].ToString();
+                if (pageItems[i - 1].ToString() == "...")
                 {
-                    tag.AddCssClass("selected");
-                    tag.AddCssClass("btn-primary");
+                    var dotTag = new TagBuilder("button");
+                    dotTag.InnerHtml = "...";
+                    dotTag.AddCssClass("btn btn-default");
+                    result.Append(dotTag.ToString());
                 }
-                tag.AddCssClass("btn btn-default");
-                tag.MergeAttribute("data-ajax","true");
-                tag.MergeAttribute("data-ajax-mode","replace");
-                tag.MergeAttribute("data-ajax-update","#todoPanel");
-                tag.MergeAttribute("data-ajax-url",pageUrl(i));
-                result.Append(tag.ToString());
+                else
+                {
+                    TagBuilder tag = new TagBuilder("a");
+                    tag.MergeAttribute("href", pageUrl(i));
+                    tag.InnerHtml = i.ToString();
+                    if (i == pagingInfo.CurrentPage)
+                    {
+                        tag.AddCssClass("selected");
+                        tag.AddCssClass("btn-primary");
+                    }
+                    tag.AddCssClass("btn btn-default");
+                    tag.MergeAttribute("data-ajax", "true");
+                    tag.MergeAttribute("data-ajax-mode", "replace");
+                    tag.MergeAttribute("data-ajax-update", "#todoPanel");
+                    tag.MergeAttribute("data-ajax-url", pageUrl(i));
+                    result.Append(tag.ToString());
+                }
             }
+
             if (pagingInfo.CurrentPage < pagingInfo.TotalPages)
             {
                 result.Append(CreateArrow(true, pagingInfo.CurrentPage, pageUrl));
@@ -50,6 +67,58 @@ namespace TodoWEB.Helpers
             nextTag.MergeAttribute("data-ajax-update", "#todoPanel");
             nextTag.MergeAttribute("data-ajax-url", pageUrl(forward ? currentPage++ : currentPage--));
             return nextTag.ToString();
+        }
+
+        private static ArrayList Pagination(int c, int m)
+        {
+            var current = c;
+            var last = m;
+            var delta = 2;
+            var left = current - delta;
+            var right = current + delta + 1;
+            var range = new int[m];
+            var rangeWithDots = new string[m];
+            var l = 0;
+
+            for (var i = 1; i <= last; i++)
+            {
+                if (i == 1 || i == last || i >= left && i < right)
+                {
+                    range[i - 1] = i;
+                }
+            }
+
+            foreach (var i in range)
+            {
+                if (l != 0)
+                {
+                    if (i - l == 2)
+                    {
+                        rangeWithDots[l] = (l + 1).ToString();
+                    }
+                    else if (i - l != 1)
+                    {
+                        rangeWithDots[l] = "...";
+                    }
+                }
+                if (i == 0)
+                {
+                    continue;
+                }
+                rangeWithDots[i - 1] = i.ToString();
+                l = i;
+            }
+            var outItems = new ArrayList();
+
+            foreach (var item in rangeWithDots)
+            {
+                if (item != null)
+                {
+                    outItems.Add(item);
+                }
+            }
+
+            return outItems;
         }
     }
 }
