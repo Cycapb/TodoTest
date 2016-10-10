@@ -1,4 +1,7 @@
-﻿@model TodoWEB.Models.AddViewModel
+﻿<script type="text/javascript">
+    $(document).ready(clickDate);
+</script>
+@model TodoWEB.Models.AddViewModel
     @using (Ajax.BeginForm("Add",null, new AjaxOptions()
     {
         Url = Url.Action("Add"),
@@ -23,4 +26,3 @@
         </div>
         <input type="submit" class="btn btn-success btn-sm pull-right" value="Сохранить" />
     }
-

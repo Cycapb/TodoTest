@@ -1,4 +1,7 @@
-﻿@model TodoWEB.Models.EditViewModel
+﻿<script type="text/javascript">
+    $(document).ready(clickDate);
+</script>
+@model TodoWEB.Models.EditViewModel
 @using (Ajax.BeginForm("Edit", new {id = Model.Id}, new AjaxOptions()
 {
     Url = Url.Action("Edit", new {id = Model.Id}),
