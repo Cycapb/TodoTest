@@ -3,11 +3,12 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using TodoDAL.Models;
 using TodoWEB.Abstract;
+using TodoWEB.Infrastructure;
 using TodoWEB.Models;
 
 namespace TodoWEB.Controllers
 {
-    
+    [BasicAuthentication]
     public class HomeController : Controller
     {
         private readonly ITodoManager _todoManager;
@@ -20,6 +21,10 @@ namespace TodoWEB.Controllers
 
         public async Task<ActionResult> Index(WebUser user)
         {
+            if (user == null)
+            {
+                user = (WebUser)HttpContext.Session?["WebUser"];
+            }
             var items = (await _todoManager.GetListAsync(user.UserId)).ToList();
             return View(items);
         }

@@ -11,7 +11,7 @@ namespace TodoWEB
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-            ModelBinders.Binders.Add(typeof(WebUser),new FakeUserModelBinder());
+            ModelBinders.Binders.Add(typeof(WebUser),new UserModelBinder());
         }
     }
 }

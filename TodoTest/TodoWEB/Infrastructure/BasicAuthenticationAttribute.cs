@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Web.Mvc;
-using Ninject;
-using TodoDAL.Abstract;
 using TodoDAL.Concrete;
 using TodoDAL.Models;
 using TodoWEB.Abstract;
@@ -16,8 +14,7 @@ namespace TodoWEB.Infrastructure
 
         public BasicAuthenticationAttribute()
         {
-            var k = System.Web.Mvc.DependencyResolver.Current.GetService(typeof(Infrastructure.NinjectDependencyResolver));
-            _userChecker = ((Infrastructure.NinjectDependencyResolver)k).Kernel.TryGet<IUserChecker>();
+            _userChecker = new UserChecker(new EntityRepository<User>());
         }
 
         public override void OnActionExecuting(ActionExecutingContext filterContext)
@@ -35,7 +32,8 @@ namespace TodoWEB.Infrastructure
                         filterContext.HttpContext.Session["WebUser"] = new WebUser()
                         {
                             Login = user.Name,
-                            Password = user.Pass
+                            Password = user.Pass,
+                            UserId = 1
                         };
                     }
                     return;
@@ -43,14 +41,6 @@ namespace TodoWEB.Infrastructure
             }
             filterContext.HttpContext.Response.AddHeader("WWW-Authenticate", "Basic realm=\"Test\"");
             filterContext.Result = new HttpUnauthorizedResult();
-        }
-
-        private IKernel CreateNinjectKernel()
-        {
-            var kernel = new StandardKernel();
-            kernel.Bind<IUserChecker>().To<UserChecker>();
-            kernel.Bind<IRepository<User>>().To<EntityRepository<User>>();
-            return kernel;
         }
     }
 }

@@ -16,7 +16,6 @@ namespace TodoWEB.Infrastructure
             {
                 user = (WebUser)controllerContext.HttpContext.Session[SessionKey];
             }
-
             return user;
         }
     }
