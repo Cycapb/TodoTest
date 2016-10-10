@@ -105,5 +105,17 @@ namespace TodoWEB.Controllers
             }
             return PartialView(model);
         }
+
+        public async Task<ActionResult> Search(WebUser user, string query)
+        {
+            if (string.IsNullOrEmpty(query))
+            {
+                return RedirectToAction("List");
+            }
+            var items = (await _todoManager.GetListAsync(user.UserId))
+                .Where(x => x.Description.ToLower().Contains(query.ToLower()))
+                .ToList();
+            return PartialView("_TodoItems",items);
+        }
     }
 }

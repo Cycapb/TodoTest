@@ -1,0 +1,5 @@
+﻿@using TodoWEB.Helpers
+@using TodoWEB.Models
+<div class="panel-footer text-center">
+    @Ajax.CreatePages((PagingInfo)ViewBag.PagingInfo, x => Url.Action("List", new { page = x }))
+</div>

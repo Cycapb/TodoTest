@@ -1,0 +1,54 @@
+﻿@model IEnumerable<TodoDAL.Models.Todo>
+<table class="table table-hover" id="todoTable">
+    <tr>
+        <th>Статус</th>
+        <th>Описание</th>
+        <th>Дата выполнения</th>
+        <th colspan="2" class="text-center">Действие</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        if (item.Complete && item.CompletionDate > DateTime.Today.Date)
+        {
+            <tr class="warning">
+                @Html.Partial("_TodoItem", item)
+            </tr>
+        }
+        else
+        {
+            if (item.Complete)
+            {
+                <tr class="success">
+                    @Html.Partial("_TodoItem", item)
+                </tr>
+            }
+        }
+
+
+        if (!item.Complete && item.CompletionDate == DateTime.Today.Date)
+        {
+            <tr class="info">
+                @Html.Partial("_TodoItem", item)
+            </tr>
+        }
+        else
+        {
+            if (!item.Complete && item.CompletionDate.Date < DateTime.Today.Date)
+            {
+                <tr class="danger">
+                    @Html.Partial("_TodoItem", item)
+                </tr>
+            }
+            else
+            {
+                if (!item.Complete)
+                {
+                    <tr>
+                        @Html.Partial("_TodoItem", item)
+                    </tr>
+                }
+            }
+        }
+    }
+</table>
+

@@ -1,17 +1,23 @@
-﻿@using TodoWEB.Helpers
-@using TodoWEB.Models
-@model IEnumerable<TodoDAL.Models.Todo>
+﻿@model IEnumerable<TodoDAL.Models.Todo>
 @{
     ViewBag.Title = "Список задач";
 }
 <div class="panel panel-primary">
     <div class="panel-heading">
-        <input type="text"/>
-        @Ajax.ActionLink("Добавить", "Add", null, new AjaxOptions()
+        @using (Ajax.BeginForm("Search",null,new AjaxOptions()
         {
-            Url = Url.Action("Add"),
+            Url   = Url.Action("Search"),
             UpdateTargetId = "todoPanel"
-        }, new {@class = "btn btn-success btn-sm pull-right"})
+        },new {@class="form-inline"}))
+        {
+            @Html.TextBox("query", null, new {@class="form-control"})
+            <input type="submit" value="Поиск" class="btn btn-default btn-xs"/>
+            @Ajax.ActionLink("Добавить", "Add", null, new AjaxOptions()
+               {
+                   Url = Url.Action("Add"),
+                   UpdateTargetId = "todoPanel"
+               }, new { @class = "btn btn-success btn-sm pull-right" })
+        }
     </div>
     <div class="panel-body" id="todoPanel">
         @Html.Action("List")
