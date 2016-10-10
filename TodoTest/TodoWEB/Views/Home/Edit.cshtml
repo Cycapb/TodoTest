@@ -21,10 +21,5 @@
             Value = DateTime.Today.ToShortDateString()
         })
     </div>
-    @Ajax.ActionLink("На главную", "List", null, new AjaxOptions()
-    {
-        Url = Url.Action("List"),
-        UpdateTargetId = "todoPanel"
-    },new { @class = "btn btn-default btn-sm pull-right" })
     <input type="submit" class="btn btn-success btn-sm pull-right" value="Сохранить" />
 }

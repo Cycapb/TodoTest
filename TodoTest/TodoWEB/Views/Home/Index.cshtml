@@ -4,23 +4,28 @@
 }
 <div class="panel panel-primary">
     <div class="panel-heading">
-        @using (Ajax.BeginForm("Search",null,new AjaxOptions()
+        @using (Ajax.BeginForm("Search", null, new AjaxOptions()
         {
-            Url   = Url.Action("Search"),
+            Url = Url.Action("Search"),
             UpdateTargetId = "todoPanel",
             OnSuccess = "clearTextbox"
-        },new {@class="form-inline"}))
+        }, new {@class = "form-inline"}))
         {
-            @Html.TextBox("query", null, new {@class="form-control" })
+            @Html.TextBox("query", null, new {@class = "form-control"})
             <input type="submit" value="Поиск" class="btn btn-default btn-xs"/>
             @Ajax.ActionLink("Добавить", "Add", null, new AjaxOptions()
-               {
-                   Url = Url.Action("Add"),
-                   UpdateTargetId = "todoPanel"
-               }, new { @class = "btn btn-success btn-sm pull-right" })
+            {
+                Url = Url.Action("Add"),
+                UpdateTargetId = "todoPanel"
+            }, new {@class = "btn btn-success btn-sm pull-right"})
         }
     </div>
     <div class="panel-body" id="todoPanel">
         @Html.Action("List")
     </div>
 </div>
+@Ajax.ActionLink("На главную", "List", null, new AjaxOptions()
+{
+    Url = Url.Action("List"),
+    UpdateTargetId = "todoPanel"
+}, new { @class = "btn btn-default btn-xs pull-right" })
