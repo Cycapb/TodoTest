@@ -1,9 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using TodoWEB.Models;
 
 namespace TodoWEB.Abstract
 {
     public interface IUserChecker
     {
-        bool IsValid(string login, string password);
+        WebUser IsValid(string login, string password);
     }
 }

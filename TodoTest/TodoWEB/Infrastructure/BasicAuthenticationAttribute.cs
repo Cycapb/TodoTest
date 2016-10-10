@@ -25,7 +25,8 @@ namespace TodoWEB.Infrastructure
             {
                 var cred = System.Text.Encoding.ASCII.GetString(Convert.FromBase64String(auth.Substring(6))).Split(':');
                 var user = new { Name = cred[0], Pass = cred[1] };
-                if (_userChecker.IsValid(user.Name, user.Pass))
+                var webUser = _userChecker.IsValid(user.Name, user.Pass);
+                if ( webUser != null)
                 {
                     if (filterContext.HttpContext.Session != null)
                     {
@@ -33,7 +34,7 @@ namespace TodoWEB.Infrastructure
                         {
                             Login = user.Name,
                             Password = user.Pass,
-                            UserId = 1
+                            UserId = webUser.UserId
                         };
                     }
                     return;

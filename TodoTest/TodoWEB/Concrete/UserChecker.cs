@@ -2,6 +2,7 @@
 using TodoDAL.Abstract;
 using TodoDAL.Models;
 using TodoWEB.Abstract;
+using TodoWEB.Models;
 
 namespace TodoWEB.Concrete
 {
@@ -14,11 +15,20 @@ namespace TodoWEB.Concrete
             _userRepository = userRepository;
         }
 
-        public bool IsValid(string login, string password)
+        public WebUser IsValid(string login, string password)
         {
             var user =
                 _userRepository.GetList().FirstOrDefault(x => x.Login == login && x.Password == password);
-            return user != null;
+            if (user == null)
+            {
+                return null;
+            }
+            return new WebUser()
+            {
+                Login = user.Login,
+                Password = user.Password,
+                UserId = user.UserId
+            };
         }
     }
 }
