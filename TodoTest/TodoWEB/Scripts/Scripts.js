@@ -3,9 +3,9 @@
 }
 
 function disableAdd() {
-    $("#btnAdd").attr("disabled",true);
+    $("#btnAdd").hide();
 }
 
 function enableAdd() {
-    $("#btnAdd").removeAttr("disabled");
+    $("#btnAdd").show();
 }
