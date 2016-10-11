@@ -68,22 +68,22 @@ namespace TodoWEB.Helpers
             return nextTag.ToString();
         }
 
-        private static List<string> Pagination(int c, int m)
+        private static List<string> Pagination(int currentPage, int totalPages)
         {
-            var current = c;
-            var last = m;
+            var current = currentPage;
+            var last = totalPages;
             var delta = 2;
             var left = current - delta;
             var right = current + delta + 1;
-            var range = new int[m];
-            var rangeWithDots = new string[m];
+            var range = new List<int>();
+            var rangeWithDots = new List<string>();
             var l = 0;
 
             for (var i = 1; i <= last; i++)
             {
                 if (i == 1 || i == last || i >= left && i < right)
                 {
-                    range[i - 1] = i;
+                    range.Add(i);
                 }
             }
 
@@ -93,31 +93,21 @@ namespace TodoWEB.Helpers
                 {
                     if (i - l == 2)
                     {
-                        rangeWithDots[l] = (l + 1).ToString();
+                        rangeWithDots.Add((l + 1).ToString());
                     }
                     else if (i - l != 1)
                     {
-                        rangeWithDots[l] = "...";
+                        rangeWithDots.Add("...");
                     }
                 }
                 if (i == 0)
                 {
                     continue;
                 }
-                rangeWithDots[i - 1] = i.ToString();
+                rangeWithDots.Add(i.ToString());
                 l = i;
             }
-            var outItems = new List<string>();
-
-            foreach (var item in rangeWithDots)
-            {
-                if (item != null)
-                {
-                    outItems.Add(item);
-                }
-            }
-
-            return outItems;
+            return rangeWithDots;
         }
     }
 }
