@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections;
+using System.Collections.Generic;
 using System.Text;
 using System.Web.Mvc;
 using TodoWEB.Models;
@@ -21,20 +21,19 @@ namespace TodoWEB.Helpers
 
             for (int i = 1; i <= pageItems.Count; i++)
             {
-                var item = pageItems[i - 1].ToString();
-                if (pageItems[i - 1].ToString() == "...")
+                if (pageItems[i - 1] == "...")
                 {
                     var dotTag = new TagBuilder("button");
                     dotTag.InnerHtml = "...";
                     dotTag.AddCssClass("btn btn-default");
-                    result.Append(dotTag.ToString());
+                    result.Append(dotTag);
                 }
                 else
                 {
                     TagBuilder tag = new TagBuilder("a");
-                    tag.MergeAttribute("href", pageUrl(i));
-                    tag.InnerHtml = i.ToString();
-                    if (i == pagingInfo.CurrentPage)
+                    tag.MergeAttribute("href", pageUrl(int.Parse(pageItems[i - 1])));
+                    tag.InnerHtml = pageItems[i - 1];
+                    if (pageItems[i - 1] == pagingInfo.CurrentPage.ToString())
                     {
                         tag.AddCssClass("selected");
                         tag.AddCssClass("btn-primary");
@@ -43,8 +42,8 @@ namespace TodoWEB.Helpers
                     tag.MergeAttribute("data-ajax", "true");
                     tag.MergeAttribute("data-ajax-mode", "replace");
                     tag.MergeAttribute("data-ajax-update", "#todoPanel");
-                    tag.MergeAttribute("data-ajax-url", pageUrl(i));
-                    result.Append(tag.ToString());
+                    tag.MergeAttribute("data-ajax-url", pageUrl(int.Parse(pageItems[i - 1])));
+                    result.Append(tag);
                 }
             }
 
@@ -69,7 +68,7 @@ namespace TodoWEB.Helpers
             return nextTag.ToString();
         }
 
-        private static ArrayList Pagination(int c, int m)
+        private static List<string> Pagination(int c, int m)
         {
             var current = c;
             var last = m;
@@ -108,7 +107,7 @@ namespace TodoWEB.Helpers
                 rangeWithDots[i - 1] = i.ToString();
                 l = i;
             }
-            var outItems = new ArrayList();
+            var outItems = new List<string>();
 
             foreach (var item in rangeWithDots)
             {
