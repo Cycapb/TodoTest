@@ -2,9 +2,9 @@
     $(document).ready(clickDate);
 </script>
 @model TodoWEB.Models.EditViewModel
-@using (Ajax.BeginForm("Edit", new {id = Model.Id}, new AjaxOptions()
+@using (Ajax.BeginForm("Edit", new {id = Model.Id, page = (int)ViewBag.Page }, new AjaxOptions()
 {
-    Url = Url.Action("Edit", new {id = Model.Id}),
+    Url = Url.Action("Edit", new {id = Model.Id, page = (int)ViewBag.Page }),
     UpdateTargetId = "todoPanel",
     OnSuccess = "enableAdd"
 }, new {@class = "form-inline"}))

@@ -71,20 +71,20 @@ namespace TodoWEB.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Delete(int id)
+        public async Task<ActionResult> Delete(int id, int page)
         {
             await _todoManager.DeleteAsync(id);
-            return RedirectToAction("List");
+            return RedirectToAction("List", new {page = page});
         }
 
         [HttpPost]
-        public async Task<ActionResult> Complete(int id)
+        public async Task<ActionResult> Complete(int id, int page)
         {
             await _todoManager.CompleteAsync(id);
-            return RedirectToAction("List");
+            return RedirectToAction("List", new {page = page});
         }
 
-        public async Task<ActionResult> Edit(int id)
+        public async Task<ActionResult> Edit(int id, int page = 1)
         {
             var item = await _todoManager.GetItemAsync(id);
             if (item == null){ return RedirectToAction("List"); }
@@ -94,11 +94,12 @@ namespace TodoWEB.Controllers
                 DtEnd = item.CompletionDate,
                 Id = item.TodoId
             };
+            ViewBag.Page = page;
             return PartialView(model);
         }
 
         [HttpPost]
-        public async Task<ActionResult> Edit(EditViewModel model)
+        public async Task<ActionResult> Edit(EditViewModel model, int page)
         {
             if (ModelState.IsValid)
             {
@@ -106,7 +107,7 @@ namespace TodoWEB.Controllers
                 todo.CompletionDate = model.DtEnd;
                 todo.Description = model.Description;
                 await _todoManager.UpdateAsync(todo);
-                return RedirectToAction("List");
+                return RedirectToAction("List", new {page = page});
             }
             return PartialView(model);
         }
@@ -120,6 +121,7 @@ namespace TodoWEB.Controllers
             var items = (await _todoManager.GetListAsync(user.UserId))
                 .Where(x => x.Description.ToLower().Contains(query.ToLower()))
                 .ToList();
+            ViewBag.PagingInfo = new PagingInfo {CurrentPage = 1};
             return PartialView("_TodoItems",items);
         }
     }

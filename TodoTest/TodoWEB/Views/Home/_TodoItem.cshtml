@@ -3,20 +3,20 @@
 <td>@Model.Description</td>
 <td>@Model.CompletionDate.ToShortDateString()</td>
 <td >
-    @using (Ajax.BeginForm("Delete", new { id = Model.TodoId }, new AjaxOptions()
+    @using (Ajax.BeginForm("Delete", new { id = Model.TodoId, page = (int)ViewBag.PagingInfo.CurrentPage }, new AjaxOptions()
     {
-        Url = Url.Action("Delete", new { id = Model.TodoId }),
+        Url = Url.Action("Delete", new { id = Model.TodoId, page = (int)ViewBag.PagingInfo.CurrentPage }),
         UpdateTargetId = "todoPanel"
     }))
     {
         if (!Model.Complete)
         {
-            @Ajax.ActionLink("Редактировать", "Edit", new { id = Model.TodoId }, new AjaxOptions()
-            {
-                Url = Url.Action("Edit", new { id = Model.TodoId }),
-                UpdateTargetId = "todoPanel",
-                OnSuccess = "disableAdd"
-            }, new { @class = "btn btn-warning btn-xs" })
+            @Ajax.ActionLink("Редактировать", "Edit", new { id = Model.TodoId, page = (int)ViewBag.PagingInfo.CurrentPage }, new AjaxOptions()
+       {
+           Url = Url.Action("Edit", new { id = Model.TodoId, page = (int)ViewBag.PagingInfo.CurrentPage }),
+           UpdateTargetId = "todoPanel",
+           OnSuccess = "disableAdd"
+       }, new { @class = "btn btn-warning btn-xs" })
         }
         <input type="submit" value="Удалить" class="btn btn-danger btn-xs"/>
     }
@@ -24,9 +24,9 @@
 <td>
     @if (!Model.Complete)
     {
-        using (Ajax.BeginForm("Complete", new {id = Model.TodoId}, new AjaxOptions()
+        using (Ajax.BeginForm("Complete", new {id = Model.TodoId, page = (int)ViewBag.PagingInfo.CurrentPage }, new AjaxOptions()
         {
-            Url = Url.Action("Complete", new {id = Model.TodoId}),
+            Url = Url.Action("Complete", new {id = Model.TodoId, page = (int)ViewBag.PagingInfo.CurrentPage }),
             UpdateTargetId = "todoPanel"
         }))
         {
