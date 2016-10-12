@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Web.Mvc;
 using Ninject;
+using Paginator.Abstract;
+using Paginator.Concrete;
 using TodoDAL.Abstract;
 using TodoDAL.Concrete;
 using TodoDAL.Models;
@@ -26,6 +28,8 @@ namespace TodoWEB.Infrastructure
             _kernel.Bind<ITodoManager>().To<TodoManager>();
             _kernel.Bind<IRepository<User>>().To<EntityRepository<User>>();
             _kernel.Bind<IRepository<Todo>>().To<EntityRepository<Todo>>();
+            _kernel.Bind<IPaginator>().To<Paginator.Concrete.Paginator>();
+            _kernel.Bind<IPageCreator>().To<AjaxPageCreator>();
         }
 
         public object GetService(Type serviceType)

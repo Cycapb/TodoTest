@@ -1,5 +1,9 @@
-﻿@using TodoWEB.Helpers
-@using TodoWEB.Models
+﻿@using TodoWEB.Models
+@using Paginator.Abstract
+@{
+    var creator = (IPageCreator)ViewBag.PageCreator;
+    var pagingInfo = (PagingInfo)ViewBag.PagingInfo;
+}
 <div class="panel-footer text-center">
-    @Ajax.CreatePages((PagingInfo)ViewBag.PagingInfo, x => Url.Action("List", new { page = x }))
+    @creator.CreatePages(pagingInfo.ItemsPerPage, pagingInfo.CurrentPage, pagingInfo.TotalItems,x => Url.Action("List", new {page = x}))
 </div>

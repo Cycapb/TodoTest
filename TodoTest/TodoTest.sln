@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoDAL", "TodoDAL\TodoDAL.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoWEB", "TodoWEB\TodoWEB.csproj", "{D27578B0-D27B-4B4D-B0C7-ED0DE76BFD13}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paginator", "Paginator\Paginator.csproj", "{21DF05C6-05B8-4FCE-B543-EE9912BAB9E6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{D27578B0-D27B-4B4D-B0C7-ED0DE76BFD13}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D27578B0-D27B-4B4D-B0C7-ED0DE76BFD13}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D27578B0-D27B-4B4D-B0C7-ED0DE76BFD13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21DF05C6-05B8-4FCE-B543-EE9912BAB9E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21DF05C6-05B8-4FCE-B543-EE9912BAB9E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21DF05C6-05B8-4FCE-B543-EE9912BAB9E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21DF05C6-05B8-4FCE-B543-EE9912BAB9E6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

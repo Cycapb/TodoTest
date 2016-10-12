@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using Paginator.Abstract;
 using TodoDAL.Models;
 using TodoWEB.Abstract;
 using TodoWEB.Infrastructure;
@@ -12,11 +13,13 @@ namespace TodoWEB.Controllers
     public class HomeController : Controller
     {
         private readonly ITodoManager _todoManager;
+        private readonly IPageCreator _pageCreator;
         private readonly int _itemsPerPage = 7;
 
-        public HomeController(ITodoManager todoManager)
+        public HomeController(ITodoManager todoManager, IPageCreator pageCreator)
         {
             _todoManager = todoManager;
+            _pageCreator = pageCreator;
         }
 
         public async Task<ActionResult> Index(WebUser user)
@@ -42,6 +45,7 @@ namespace TodoWEB.Controllers
                 TotalItems = _todoManager.GetList(user.UserId).ToList().Count,
                 ItemsPerPage = _itemsPerPage
             };
+            ViewBag.PageCreator = _pageCreator;
             return PartialView("_TodoList", items);
         }
         

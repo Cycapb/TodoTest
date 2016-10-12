@@ -261,7 +261,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\PagingHelper.cs" />
     <Compile Include="Infrastructure\BasicAuthenticationAttribute.cs" />
     <Compile Include="Infrastructure\FakeUserModelBinder.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
@@ -295,8 +294,13 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Helpers\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Paginator\Paginator.csproj">
+      <Project>{21df05c6-05b8-4fce-b543-ee9912bab9e6}</Project>
+      <Name>Paginator</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TodoDAL\TodoDAL.csproj">
       <Project>{71091c55-bec3-4bfa-a9a5-8793f7a4e956}</Project>
       <Name>TodoDAL</Name>
