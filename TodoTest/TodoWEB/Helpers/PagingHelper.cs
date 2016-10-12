@@ -70,18 +70,16 @@ namespace TodoWEB.Helpers
 
         private static List<string> Pagination(int currentPage, int totalPages)
         {
-            var current = currentPage;
-            var last = totalPages;
             var delta = 2;
-            var left = current - delta;
-            var right = current + delta + 1;
+            var left = currentPage - delta;
+            var right = currentPage + delta + 1;
             var range = new List<int>();
             var rangeWithDots = new List<string>();
             var l = 0;
 
-            for (var i = 1; i <= last; i++)
+            for (var i = 1; i <= totalPages; i++)
             {
-                if (i == 1 || i == last || i >= left && i < right)
+                if (i == 1 || i == totalPages || i >= left && i < right)
                 {
                     range.Add(i);
                 }
