@@ -57,6 +57,11 @@ namespace TodoDAL.Concrete
         {
             await _context.SaveChangesAsync();
         }
+
+        public int Count()
+        {
+            return _dbSet.Count();
+        }
     }
 
 }
