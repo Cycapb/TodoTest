@@ -42,7 +42,7 @@ namespace TodoWEB.Controllers
             ViewBag.PagingInfo = new PagingInfo()
             {
                 CurrentPage = page,
-                TotalItems = _todoManager.GetList(user.UserId).ToList().Count,
+                TotalItems = _todoManager.GetList(user.UserId).Count(),
                 ItemsPerPage = _itemsPerPage
             };
             ViewBag.PageCreator = _pageCreator;

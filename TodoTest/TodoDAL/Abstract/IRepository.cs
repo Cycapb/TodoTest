@@ -12,6 +12,5 @@ namespace TodoDAL.Abstract
         Task DeleteAsync(int id);
         Task UpdateAsync(T item);
         Task SaveAsync();
-        int Count();
     }
 }
